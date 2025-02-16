@@ -1,5 +1,5 @@
 const Receipt = require("../models/receipt");
-const tradePDF = require("@zed378/invoice-pdfkit");
+const DefaultTemplateWriter = require("../invoice-templates/default");
 const fs = require("fs");
 
 module.exports = {
@@ -19,45 +19,8 @@ module.exports = {
     },
     generateReceiptByID: async id => {
         const receipt = await Receipt.findById(id);
-        tradePDF.init({
-            logo: fs.existsSync("logo.jpg") ? fs.readFileSync("logo.jpg") : undefined,
-            company: {
-                company: receipt.businessName,
-                email: receipt.bussinessEmail,
-                web: receipt.businessWebsite
-            },
-            currency: "AUD",
-        });
-        let invoiceItems = [];
-        receipt.items.forEach(item => {
-            invoiceItems.push({
-                id: item._id.toString(),
-                desc: item.description,
-                tax: "0",
-                qty: "0",
-                price: item.unitPrice.toString()
-            });
-        });
-        const pdfData = tradePDF.invoice({
-            id: receipt._id,
-            date: {
-                created: receipt.createdAt.toDateString(),
-                due: receipt.dueDate.toDateString()
-            },
-            bill: {
-                company: receipt.customerName,
-                email: receipt.customerEmail
-            },
-            items: invoiceItems,
-            total: {
-                discount: 0,
-                stateTax: 0,
-                fedTax: receipt.tax,
-                ship: 20
-            }
-        });
-        fs.writeFileSync(`./receipts/receipt-${id}.pdf`, pdfData);
-        console.log("Generated simple.pdf");
+        // returns promise as file io operations are stream based and unaffected by async await
+        await DefaultTemplateWriter(receipt)
     },
     receiptExists: id => {
         return fs.existsSync(`./receipts/receipt-${id}.pdf`);

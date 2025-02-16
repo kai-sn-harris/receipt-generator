@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const pdfkit = require("pdfkit");
 const api = require("./api");
 
 const app = express();
