@@ -44,7 +44,7 @@ module.exports = data => {
 
         // --- INVOICE DETAILS ---
         doc.font("Helvetica-Bold").text("INVOICE ID:", 345, 100);
-        doc.font("Helvetica").text(id, 495-77, 100);
+        doc.font("Helvetica").text(id, 495-81, 100);
         doc.font("Helvetica-Bold").text("DATE:", 345, 115);
         doc.font("Helvetica").text(formatDate(dateCreated), 445, 115, { align: "right" });
         doc.font("Helvetica-Bold").text("DUE DATE:", 345, 130);
