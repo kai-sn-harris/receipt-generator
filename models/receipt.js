@@ -2,27 +2,27 @@ const mongoose = require("mongoose");
 
 const ReceiptSchema = new mongoose.Schema({
 //   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Links to User model
-  billingCompany: { type: String, required: true }, // Name of the business issuing the receipt
-  billingName: { type: String, required: true }, // Business address
-  billingEmail: { type: String, required: true }, // Business email
-  billingAddress: { type: String, required: true }, // Business Website
-  dateCreated: { type: Date, default: Date.now }, // Timestamp for when the receipt was created
-  dateDue: { type: Date, default: Date.now }, // Timestamp for last update
-  company: { type: String, required: true }, // Customer name
-  email: { type: String, required: true }, // Customer name
-  website: { type: String, required: true }, // Customer name
+  billingCompany: { type: String, required: true },
+  billingName: { type: String, required: true }, 
+  billingEmail: { type: String, required: true }, 
+  billingAddress: { type: String, required: true },
+  dateCreated: { type: Date, default: Date.now },
+  dateDue: { type: Date, default: Date.now },
+  company: { type: String, required: true },
+  email: { type: String, required: true },
+  website: { type: String, required: true },
   items: [
     {
-      description: { type: String, required: true }, // Item description
-      quantity: { type: Number, required: true, min: 1 }, // Quantity purchased
-      unitPrice: { type: Number, required: true }, // Price per unit
-      totalPrice: { type: Number, required: true } // Total cost for the item
+      description: { type: String, required: true },
+      quantity: { type: Number, required: true, min: 1 },
+      unitPrice: { type: Number, required: true },
+      totalPrice: { type: Number, required: true }
     }
   ],
-  subtotal: { type: Number, required: true }, // Total before tax
-  tax: { type: Number, default: 0 }, // Tax amount (GST, VAT, etc.)
-  totalAmount: { type: Number, required: true }, // Final total amount after tax
-  paymentMethod: { type: String, required: true }, // Payment type
+  subtotal: { type: Number, required: true },
+  tax: { type: Number, default: 0 },
+  totalAmount: { type: Number, required: true }, 
+  paymentMethod: { type: String, required: true }, 
   // paymentStatus: { type: String, enum: ["Paid", "Pending", "Failed"], default: "Paid" }, // Payment status
   // notes: { type: String }, // Additional notes or comments
 });

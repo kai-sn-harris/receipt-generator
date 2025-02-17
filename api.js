@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const ReceiptController = require("./controllers/receipt");
-const fs = require("fs")
 
 router.get("/status", (req, res) => {
     res.json({ status: "working" });
