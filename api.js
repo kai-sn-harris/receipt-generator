@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ReceiptController = require("./controllers/receipt");
 const UserController = require("./controllers/user");
+const Middleware = require("./middleware");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -16,7 +17,7 @@ router.post("/create-receipt", async (req, res) => {
     else res.json({ status: "Successfully created new receipt", id: newReceiptID });
 });
 
-router.get("/get-receipt/:id", async (req, res) => {
+router.get("/get-receipt/:templateName/:id", Middleware.templateAuth, async (req, res) => {
     let id = req.params.id;
     // if receipt exists already then just send the file otherwise generate it first
     if(!ReceiptController.receiptExists(id)) await ReceiptController.generateReceiptByID(id);
