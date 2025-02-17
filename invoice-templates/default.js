@@ -90,6 +90,17 @@ module.exports = data => {
         doc.text("TOTAL", 400, y);
         doc.text(`$${totalAmount}`, 500, y, { align: "right" });
 
+        // add watermark
+        doc.font("Helvetica-Bold")
+            .fontSize(100) // Large font size
+            .fillColor("gray") // Light gray watermark
+            .fillOpacity(0.2) // Make it transparent
+            .rotate(-45, { origin: [300, 400] }) // Rotate diagonally
+            .text("Default Invoice", 100, 300, { align: "center" })
+            .fillOpacity(1) // Reset opacity for normal text
+            .rotate(45, { origin: [300, 400] }); // Reset rotation
+
+
         // Finalize the PDF
         doc.end();
 
