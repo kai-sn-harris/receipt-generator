@@ -95,10 +95,14 @@ module.exports = data => {
             .fontSize(100) // Large font size
             .fillColor("gray") // Light gray watermark
             .fillOpacity(0.2) // Make it transparent
-            .rotate(-45, { origin: [300, 400] }) // Rotate diagonally
-            .text("Default Invoice", 100, 300, { align: "center" })
+            .text("Free Template", 100, 100, { align: "center" })
             .fillOpacity(1) // Reset opacity for normal text
-            .rotate(45, { origin: [300, 400] }); // Reset rotation
+        doc.font("Helvetica-Bold")
+            .fontSize(100) // Large font size
+            .fillColor("gray") // Light gray watermark
+            .fillOpacity(0.2) // Make it transparent
+            .text("Free Template", 100, 400, { align: "center" })
+            .fillOpacity(1) // Reset opacity for normal text
 
 
         // Finalize the PDF
